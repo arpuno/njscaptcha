@@ -1,0 +1,37 @@
+<html>
+<head>
+    <title>Captcha</title>
+    	<meta charset="utf-8">
+    	<meta name="author" content="Andrej Potapov">
+    	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+</head>
+	<script>
+	$(document).ready(function(){
+		$("#back").submit(function(){
+		event.preventDefault();
+									})
+		$("#check").click(function(){
+			var data = {
+				"src" : $("#capt").val()
+					   };
+			$.ajax({
+				method: "POST",
+				url: "/captcha",
+				data: data
+				  })
+			.success(function(result){
+				$("h1").html(result.answer);
+			})
+		})
+	})		
+	</script>
+</head>
+<body>
+<img src="/captcha.png"><br>
+<br>
+<input class="form-control" id="capt">
+<br>
+<br>
+<button type="submit" id="check">Check</button>
+</body>
+</html>
